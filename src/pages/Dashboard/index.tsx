@@ -42,7 +42,7 @@ export default function Dashboard() {
 			setLoading(true);
 
 			try {
-				const response = await api.get('/reserve', {
+				const response = await api.get('/reserve/detail/date', {
 					params: {
 						date: new Date(currentDate(new Date())),
 					},
@@ -97,7 +97,7 @@ export default function Dashboard() {
 				</View>
 			) : (
 				<FlatList
-					style={{ marginTop: 30 }}
+					style={{ marginTop: 20 }}
 					data={reservations}
 					keyExtractor={(item) => item.id}
 					renderItem={({ item }) => (

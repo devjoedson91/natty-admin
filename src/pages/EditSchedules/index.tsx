@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-import { FlatList, StyleSheet, View } from 'react-native';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { FlatList, StyleSheet } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import { localeConfig } from '../../util/calendarConfig';
 import { currentDate } from '../../util/format';
@@ -22,8 +21,8 @@ import { api } from '../../services/api';
 import { toastMessages } from '../../util/toastMessages';
 import Loading from '../../components/Loading';
 
-interface DateProps {
-	dateString: string | undefined;
+export interface DateProps {
+	dateString: string;
 	day: number;
 	month: number;
 	timestamp: number;
@@ -37,11 +36,6 @@ interface ScheduleProps {
 	service_id: string;
 }
 
-interface ScheduleParams {
-	service_id?: string;
-	date?: string;
-}
-
 interface MarkedDateProps {
 	selected: boolean;
 	selectedColor: string;
@@ -52,7 +46,7 @@ interface MarkedDateProps {
 	// activeOpacity: number;
 }
 
-interface MarkedDateKeysProp {
+export interface MarkedDateKeysProp {
 	[key: string]: MarkedDateProps;
 }
 
@@ -133,12 +127,10 @@ export default function EditSchedules({ serviceSelected }: EditServicesProps) {
 				service_id: serviceSelected,
 			});
 
-			console.log(response.data);
-
 			loadSchedules();
 			setLoading(false);
 		} catch (err) {
-			console.log('erro ao adicionar horário:', err);
+			console.log('erro ao adicionar horário: ', err);
 			toastMessages('Erro ao adicionar horário');
 		}
 	}
