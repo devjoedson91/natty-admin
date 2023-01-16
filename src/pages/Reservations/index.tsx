@@ -69,7 +69,7 @@ export default function Reservations() {
 
 	let markedDates: MarkedDateKeysProp = {};
 
-	markedDates[currentDateMarked ?? initialDate] = { selected: true, selectedColor: '#5841AD' };
+	markedDates[currentDateMarked ?? initialDate] = { selected: true, selectedColor: '#ee4691' };
 
 	localeConfig.defaultLocale = 'br';
 	return (
@@ -117,6 +117,7 @@ export default function Reservations() {
 								</AreaDescription>
 								<ButtonReserve
 									onPress={() => handleFinalizeReservation(item.id)}
+									disabled={item.status}
 									isFinalized={item.status}
 								>
 									<ButtonText>

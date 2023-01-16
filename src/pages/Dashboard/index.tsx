@@ -114,8 +114,10 @@ export default function Dashboard() {
 									<Price>{formatPrice(parseFloat(item.services.price))}</Price>
 								</DescriptionBlock>
 							</AreaDescription>
-							<ButtonReserve>
-								<ButtonText>Finalizar Reserva</ButtonText>
+							<ButtonReserve disabled={item.status} isFinalized={item.status}>
+								<ButtonText>
+									{item.status ? 'Finalizada' : 'Finalizar Reserva'}
+								</ButtonText>
 							</ButtonReserve>
 						</ContainerReservations>
 					)}

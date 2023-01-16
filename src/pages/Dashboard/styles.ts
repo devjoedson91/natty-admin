@@ -130,9 +130,7 @@ interface ButtonProps {
     isFinalized: boolean;
 }
 
-export const ButtonReserve = styled.TouchableOpacity.attrs<ButtonProps>(props => ({
-    disabled: props.isFinalized ? true : false
-}))`
+export const ButtonReserve = styled.TouchableOpacity<ButtonProps>`
     width: 147px;
     height: 38px;
     border-radius: 6px;
@@ -140,4 +138,5 @@ export const ButtonReserve = styled.TouchableOpacity.attrs<ButtonProps>(props =>
     justify-content: center;
     align-items: center;
     align-self: center;
+    ${(props) => css`opacity: ${props.isFinalized ? 0.7 : 1};`};
 `;

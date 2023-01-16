@@ -145,7 +145,7 @@ export default function EditSchedules({ serviceSelected }: EditServicesProps) {
 
 	let markedDates: MarkedDateKeysProp = {};
 
-	markedDates[currentDateMarked ?? initialDate] = { selected: true, selectedColor: '#5841AD' };
+	markedDates[currentDateMarked ?? initialDate] = { selected: true, selectedColor: '#ee4691' };
 
 	localeConfig.defaultLocale = 'br';
 
