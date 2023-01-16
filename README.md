@@ -21,6 +21,15 @@ Em conclusão
 
 ## Layout mobile
 
+<div style="display: flex; gap: 15px;">
+   <img src="https://github.com/devjoedson91/easyservices-api/blob/main/tmp/login.jpg" width="200" />
+   <img src="https://github.com/devjoedson91/easyservices-api/blob/main/tmp/dashboard-admin.jpg" width="200" />
+   <img src="https://github.com/devjoedson91/easyservices-api/blob/main/tmp/reservations.jpg" width="200" />
+   <img src="https://github.com/devjoedson91/easyservices-api/blob/main/tmp/services-admin.jpg" width="200" />
+   <img src="https://github.com/devjoedson91/easyservices-api/blob/main/tmp/editservice.jpg" width="200" />
+   <img src="https://github.com/devjoedson91/easyservices-api/blob/main/tmp/schedule.jpg" width="200" />
+</div>
+
 # Tecnologias utilizadas
 ## Front end
 - React Native
