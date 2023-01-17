@@ -20,6 +20,7 @@ import {
 import { api } from '../../services/api';
 import { toastMessages } from '../../util/toastMessages';
 import Loading from '../../components/Loading';
+import { ReservationsProps } from '../../@types/reservations';
 
 export interface DateProps {
 	dateString: string;
@@ -61,13 +62,26 @@ export default function EditSchedules({ serviceSelected }: EditServicesProps) {
 			year: new Date(initialDate).getFullYear(),
 		};
 	});
+	const [reservations, setReservations] = useState<ReservationsProps[]>([]);
 	const [scheduleDate, setScheduleDate] = useState<ScheduleProps[]>([]);
 	const [hour, setHour] = useState('');
 	const [loading, setLoading] = useState(false);
 
 	useEffect(() => {
+		loadReservations();
 		loadSchedules();
 	}, [dateSelected]);
+
+	async function loadReservations() {
+		const response = await api.get('/reserve/detail/date', {
+			params: {
+				date: dateSelected.dateString,
+				service_id: serviceSelected,
+			},
+		});
+
+		setReservations(response.data);
+	}
 
 	async function loadSchedules() {
 		setLoading(true);
@@ -87,17 +101,23 @@ export default function EditSchedules({ serviceSelected }: EditServicesProps) {
 		}
 	}
 
-	async function handleRemoveSchedule(schedule_id: string) {
-		setLoading(true);
+	async function handleRemoveSchedule(schedule_id: string, hour: string) {
+		const reserverExists = reservations.some((reserve) => reserve.hour === hour);
 
-		try {
-			await api.delete('/schedule', { params: { schedule_id: schedule_id } });
+		if (reserverExists) {
+			toastMessages('Há reservas cadastradas para esse horário!');
+		} else {
+			setLoading(true);
 
-			setLoading(false);
-			loadSchedules();
-		} catch (err) {
-			console.log('erro ao excluir horário:', err);
-			toastMessages('Erro ao excluir horário');
+			try {
+				await api.delete('/schedule', { params: { schedule_id: schedule_id } });
+
+				setLoading(false);
+				loadSchedules();
+			} catch (err) {
+				console.log('erro ao excluir horário:', err);
+				toastMessages('Erro ao excluir horário');
+			}
 		}
 	}
 
@@ -185,7 +205,9 @@ export default function EditSchedules({ serviceSelected }: EditServicesProps) {
 						renderItem={({ item }) => (
 							<ListContainer>
 								<HourDescription>{item.hour}</HourDescription>
-								<RemoveButton onPress={() => handleRemoveSchedule(item.id)}>
+								<RemoveButton
+									onPress={() => handleRemoveSchedule(item.id, item.hour)}
+								>
 									<Feather name="trash-2" size={30} color="#ff3f4b" />
 								</RemoveButton>
 							</ListContainer>

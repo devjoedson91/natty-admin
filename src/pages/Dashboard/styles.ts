@@ -134,9 +134,8 @@ export const ButtonReserve = styled.TouchableOpacity<ButtonProps>`
     width: 147px;
     height: 38px;
     border-radius: 6px;
-    background-color: ${({theme}) => theme.colors.blue400};
+    ${props => css`background-color: ${props.isFinalized ? '#C4A7D0' : '#5841AD'};`}
     justify-content: center;
     align-items: center;
     align-self: center;
-    ${(props) => css`opacity: ${props.isFinalized ? 0.7 : 1};`};
 `;
