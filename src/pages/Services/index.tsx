@@ -7,12 +7,13 @@ import {
 	ButtonService,
 	NameService,
 } from './styles';
-import { FlatList, ToastAndroid } from 'react-native';
+import { FlatList } from 'react-native';
 import { api } from '../../services/api';
 import Loading from '../../components/Loading';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { StackParamsList } from '../../routes/app.routes';
+import { toastMessages } from '../../util/toastMessages';
 
 export interface CategoriesProps {
 	id: string;
@@ -45,11 +46,7 @@ export default function Services() {
 					setLoading(false);
 				} catch (err) {
 					console.log('Erro ao carregar categorias: ', err);
-					ToastAndroid.showWithGravity(
-						'Erro ao carregar categorias',
-						ToastAndroid.SHORT,
-						ToastAndroid.BOTTOM
-					);
+					toastMessages('Erro ao carregar categorias');
 					setLoading(false);
 				}
 			}

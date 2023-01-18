@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { View, Text, FlatList } from 'react-native';
+import { View, Text, FlatList, Alert } from 'react-native';
 import {
 	Container,
 	Logo,
@@ -25,6 +25,7 @@ import { formatPrice } from '../../util/format';
 import { ReservationsProps } from '../../@types/reservations';
 import { Octicons, Entypo } from '@expo/vector-icons';
 import { currentDate } from '../../util/format';
+import { toastMessages } from '../../util/toastMessages';
 
 export interface UserInfo {
 	id: string;
@@ -38,26 +39,26 @@ export default function Dashboard() {
 	const [totalCashToday, setTotalCashToday] = useState(formatPrice(0));
 
 	useEffect(() => {
-		async function loadReservations() {
-			setLoading(true);
-
-			try {
-				const response = await api.get('/reserve/detail/date', {
-					params: {
-						date: new Date(currentDate(new Date())),
-					},
-				});
-
-				setReservations(response.data);
-				setLoading(false);
-			} catch (err) {
-				console.log('Erro de requisição: ', err);
-				setLoading(false);
-			}
-		}
-
 		loadReservations();
 	}, []);
+
+	async function loadReservations() {
+		setLoading(true);
+
+		try {
+			const response = await api.get('/reserve/detail/date', {
+				params: {
+					date: new Date(currentDate(new Date())),
+				},
+			});
+
+			setReservations(response.data);
+			setLoading(false);
+		} catch (err) {
+			console.log('Erro de requisição: ', err);
+			setLoading(false);
+		}
+	}
 
 	useEffect(() => {
 		if (reservations) {
@@ -72,6 +73,29 @@ export default function Dashboard() {
 			});
 		}
 	}, [reservations]);
+
+	function handleFinalizeReservation(reserve_id: string) {
+		Alert.alert('Reservas', 'Deseja realmente finalizar essa reservas', [
+			{
+				text: 'SIM',
+				onPress: async () => {
+					try {
+						await api.put('/reserve/finish', { reserve_id: reserve_id });
+						toastMessages('Reserva finalizada com sucesso!');
+						loadReservations();
+					} catch (err) {
+						console.log('erro ao finalizar reserva: ', err);
+						toastMessages('Erro ao finalizar reserva');
+					}
+				},
+			},
+			{
+				text: 'NÂO',
+				onPress: () => console.log('Cancel Pressed'),
+				style: 'cancel',
+			},
+		]);
+	}
 
 	if (loading) {
 		return <Loading />;
@@ -114,7 +138,11 @@ export default function Dashboard() {
 									<Price>{formatPrice(parseFloat(item.services.price))}</Price>
 								</DescriptionBlock>
 							</AreaDescription>
-							<ButtonReserve disabled={item.status} isFinalized={item.status}>
+							<ButtonReserve
+								onPress={() => handleFinalizeReservation(item.id)}
+								disabled={item.status}
+								isFinalized={item.status}
+							>
 								<ButtonText>
 									{item.status ? 'Finalizada' : 'Finalizar Reserva'}
 								</ButtonText>

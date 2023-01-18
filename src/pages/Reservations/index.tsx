@@ -15,7 +15,7 @@ import { Octicons, Entypo } from '@expo/vector-icons';
 import { formatPrice } from '../../util/format';
 import { Calendar } from 'react-native-calendars';
 import { localeConfig } from '../../util/calendarConfig';
-import { StyleSheet, View, Text, FlatList } from 'react-native';
+import { StyleSheet, View, Text, FlatList, Alert } from 'react-native';
 import { currentDate } from '../../util/format';
 import { DateProps, MarkedDateKeysProp } from '../EditSchedules';
 import { api } from '../../services/api';
@@ -60,7 +60,28 @@ export default function Reservations() {
 		}
 	}
 
-	async function handleFinalizeReservation(reserve_id: string) {}
+	function handleFinalizeReservation(reserve_id: string) {
+		Alert.alert('Reservas', 'Deseja realmente finalizar essa reservas', [
+			{
+				text: 'SIM',
+				onPress: async () => {
+					try {
+						await api.put('/reserve/finish', { reserve_id: reserve_id });
+						toastMessages('Reserva finalizada com sucesso!');
+						loadReservations();
+					} catch (err) {
+						console.log('erro ao finalizar reserva: ', err);
+						toastMessages('Erro ao finalizar reserva');
+					}
+				},
+			},
+			{
+				text: 'NÂO',
+				onPress: () => console.log('Cancel Pressed'),
+				style: 'cancel',
+			},
+		]);
+	}
 
 	let reserveDay = dateSelected.dateString.slice(8, 10);
 	let reserveMonth = dateSelected.dateString.slice(5, 7);
