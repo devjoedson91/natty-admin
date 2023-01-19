@@ -15,7 +15,7 @@ import { Octicons, Entypo } from '@expo/vector-icons';
 import { formatPrice } from '../../util/format';
 import { Calendar } from 'react-native-calendars';
 import { localeConfig } from '../../util/calendarConfig';
-import { StyleSheet, View, Text, FlatList, Alert } from 'react-native';
+import { View, Text, FlatList, Alert } from 'react-native';
 import { currentDate } from '../../util/format';
 import { DateProps, MarkedDateKeysProp } from '../EditSchedules';
 import { api } from '../../services/api';
@@ -96,7 +96,7 @@ export default function Reservations() {
 	return (
 		<Container>
 			<Calendar
-				style={styles.calendar}
+				style={{ borderBottomWidth: 1, borderColor: '#e6e6e6' }}
 				current={
 					dateSelected?.dateString === undefined ? initialDate : dateSelected?.dateString
 				}
@@ -154,10 +154,3 @@ export default function Reservations() {
 		</Container>
 	);
 }
-
-const styles = StyleSheet.create({
-	calendar: {
-		borderBottomWidth: 1,
-		borderColor: '#e6e6e6',
-	},
-});

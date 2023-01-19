@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { FlatList, StyleSheet } from 'react-native';
+import { FlatList } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import { localeConfig } from '../../util/calendarConfig';
 import { currentDate } from '../../util/format';
@@ -172,7 +172,7 @@ export default function EditSchedules({ serviceSelected }: EditServicesProps) {
 	return (
 		<Container>
 			<Calendar
-				style={styles.calendar}
+				style={{ borderBottomWidth: 1, borderColor: '#e6e6e6' }}
 				current={
 					dateSelected?.dateString === undefined ? initialDate : dateSelected?.dateString
 				}
@@ -219,10 +219,3 @@ export default function EditSchedules({ serviceSelected }: EditServicesProps) {
 		</Container>
 	);
 }
-
-const styles = StyleSheet.create({
-	calendar: {
-		borderBottomWidth: 1,
-		borderColor: '#e6e6e6',
-	},
-});
