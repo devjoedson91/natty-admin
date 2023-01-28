@@ -29,6 +29,7 @@ Concluído
 - Tratamento de erros
 - Mensagens ao usuário
 - Fluxo de aplicação
+- Animações
 
 ## Layout mobile
 
