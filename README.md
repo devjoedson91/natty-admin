@@ -54,6 +54,10 @@ Concluído
 - Node js
 - Express
 - postGresql
+- Prisma io
+- Typescript
+- Dotenv
+- JWT
 
 ## Como executar o projeto
 
