@@ -1,15 +1,15 @@
 # Natty Admin
 [![NPM](https://img.shields.io/npm/l/react)](https://github.com/devsuperior/sds1-wmazoni/blob/master/LICENSE) 
 
-# Sobre o projeto
+## Sobre o projeto
 
 Projeto de aplicativo para administrador de serviços de salão de beleza.
 
-# Status
+## Status
 
-Em conclusão
+Concluído
 
-# Funcionalidades
+## Funcionalidades
 
 - login e autenticação de usuários.
 - Previsão de clientes e faturamento diário
@@ -18,6 +18,17 @@ Em conclusão
 - Cadastro e exclusão de horários.
 - Visualização de todas as reservas cadastradas pelos usuários do Natty App.
 - Opção de finalização ou cancelamento da reserva.
+
+## Hábilidades aplicadas no projeto
+
+- Construção de API própria com conexão ao um banco de dados
+- RESTFUL
+- HTTP
+- Tratamento de dados com funções assincronas
+- Validações
+- Tratamento de erros
+- Mensagens ao usuário
+- Fluxo de aplicação
 
 ## Layout mobile
 
@@ -43,7 +54,7 @@ Em conclusão
 - Express
 - postGresql
 
-# Como executar o projeto
+## Como executar o projeto
 
 - Clone o repositório em https://github.com/devjoedson91/natty-admin.git
 - entrar no terminal cmd ou git bash
@@ -55,7 +66,7 @@ Em conclusão
 ## Front end web
 Pré-requisitos: npm/yarn / node / expo-cli
 
-# Autor
+## Autor
 
 Joedson Ferreira
 
