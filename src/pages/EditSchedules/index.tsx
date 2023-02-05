@@ -96,7 +96,7 @@ export default function EditSchedules({ serviceSelected }: EditServicesProps) {
 			setLoading(false);
 			setScheduleDate(response.data);
 		} catch (err) {
-			console.log('erro ao carregar horários:', err);
+			setLoading(false);
 			toastMessages('Erro ao carregar horários');
 		}
 	}
@@ -115,7 +115,7 @@ export default function EditSchedules({ serviceSelected }: EditServicesProps) {
 				setLoading(false);
 				loadSchedules();
 			} catch (err) {
-				console.log('erro ao excluir horário:', err);
+				setLoading(false);
 				toastMessages('Erro ao excluir horário');
 			}
 		}
@@ -150,15 +150,15 @@ export default function EditSchedules({ serviceSelected }: EditServicesProps) {
 			loadSchedules();
 			setLoading(false);
 		} catch (err) {
-			console.log('erro ao adicionar horário: ', err);
 			toastMessages('Erro ao adicionar horário');
+			setLoading(false);
 		}
 	}
 
 	function validateHourText(value: string) {
-		let elementText = value.replace(/\D/g, '').replace(/(\d{2})(\d)/, '$1:$2');
+		let hour = value.replace(/\D/g, '').replace(/(\d{2})(\d)/, '$1:$2');
 
-		return elementText;
+		return hour.slice(0, 5);
 	}
 
 	let currentDateMarked = dateSelected.dateString;
