@@ -1,17 +1,17 @@
-import { View, Text, StyleSheet, TouchableOpacity, Dimensions, ScrollView } from 'react-native';
-import { CategoryProps } from '../../pages/StackServicesNavigation';
+import { View, StyleSheet, TouchableOpacity, Dimensions, ScrollView } from 'react-native';
 import { CategoryName } from './styles';
+import { CategoriesProps } from '../../pages/Services';
 
 interface ModalPickerProps {
-	options: CategoryProps[];
+	options: CategoriesProps[];
 	handleCloseModal: () => void;
-	selectedItem: (item: CategoryProps) => void;
+	selectedItem: (item: CategoriesProps) => void;
 }
 
 const { width: WIDTH, height: HEIGHT } = Dimensions.get('window');
 
 export function ModalPicker({ options, handleCloseModal, selectedItem }: ModalPickerProps) {
-	function onPressItem(item: CategoryProps) {
+	function onPressItem(item: CategoriesProps) {
 		selectedItem(item);
 		handleCloseModal();
 	}
@@ -43,15 +43,13 @@ const styles = StyleSheet.create({
 	content: {
 		width: WIDTH - 20,
 		height: HEIGHT / 2,
-		backgroundColor: '#f0f0f5',
-		borderWidth: 1,
-		borderColor: '#8a8a8a',
+		backgroundColor: '#872BC9',
 		borderRadius: 4,
 	},
 
 	option: {
 		alignItems: 'flex-start',
 		borderTopWidth: 0.8,
-		borderTopColor: '#8a8a8a',
+		borderTopColor: '#e6e6e6',
 	},
 });
