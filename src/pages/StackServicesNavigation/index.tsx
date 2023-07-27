@@ -46,6 +46,7 @@ export default function StackServicesNavigation() {
 					borderColor: '#A5A4B4',
 					height: 60,
 				},
+				tabBarHideOnKeyboard: true
 			}}
 			initialRouteName="EditServices"
 		>

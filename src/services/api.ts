@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const api = axios.create({
 
-    baseURL: 'https://natty-server-production.up.railway.app'
+    baseURL: 'http://192.168.2.118:3333'
 
 });
 
