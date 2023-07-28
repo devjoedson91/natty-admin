@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { FlatList } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import { localeConfig } from '../../util/calendarConfig';
@@ -66,6 +66,13 @@ export default function EditSchedules({ serviceSelected }: EditServicesProps) {
 	const [scheduleDate, setScheduleDate] = useState<ScheduleProps[]>([]);
 	const [hour, setHour] = useState('');
 	const [loading, setLoading] = useState(false);
+
+	const inputHour = useRef<HTMLInputElement | any>();
+
+	function focusInput() {
+
+		inputHour.current.focus();
+	}
 
 	useEffect(() => {
 		loadReservations();
@@ -149,6 +156,8 @@ export default function EditSchedules({ serviceSelected }: EditServicesProps) {
 
 			loadSchedules();
 			setLoading(false);
+			setHour('');
+			focusInput();
 		} catch (err) {
 			toastMessages('Erro ao adicionar horário');
 			setLoading(false);
@@ -190,7 +199,8 @@ export default function EditSchedules({ serviceSelected }: EditServicesProps) {
 						keyboardType="numeric"
 						placeholder="00:00"
 						maxLength={5}
-						onChangeText={(value) => setHour(validateHourText(value))}
+						onChangeText={(value) => setHour(validateHourText(value))} 
+						ref={inputHour}
 					/>
 					<AddScheduleButton onPress={handleAddSchedule}>
 						<TextButton>add</TextButton>
